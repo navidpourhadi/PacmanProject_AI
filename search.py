@@ -72,6 +72,54 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
+
+
+
+
+def graphSearch(problem, fringes):
+    """
+    this function is a general graph search that implement based on the algorithm
+    we had in lectures and instruction of project with some changes
+    """
+
+    # add starting point node to the list
+    fringes.push([(problem.getStartState(), "Stop", 0)])
+    # make the visited node list
+    closed = []
+
+    while not fringes.isEmpty():
+        # make a list that show the path until current node
+        path = fringes.pop()
+
+        currentNode = path[-1][0]
+        if problem.isGoalState(currentNode):
+            return [x[1] for x in path][1:]
+
+        if currentNode not in closed:
+            closed.append(currentNode)
+
+            # add successors of current node at the end of the fringes list
+            for successor in problem.getSuccessors(currentNode):
+                # test if this successor state is in closed list or not
+                if successor[0] not in closed:
+                    # make the successor path and add it at the end of the fringes
+                    successorPath = path[:]
+                    successorPath.append(successor)
+                    fringes.push(successorPath)
+
+    return False
+
+
+
+
+
+
+
+
+
+
+
+
 def depthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
