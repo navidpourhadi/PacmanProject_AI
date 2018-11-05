@@ -134,18 +134,33 @@ def depthFirstSearch(problem):
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # dfs algorithm implement by stack
+    stack = util.Stack()
+
+    return graphSearch(problem ,stack)
+
+
+
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # bfs algorithm implement by queue
+    queue = util.Queue()
+
+    return graphSearch(problem, queue)
+
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    # first define cost and how compute it , then implement ucs with a priority queue
+    cost = lambda path : problem.getCostOfActions([x[1] for x in path][1:])
+
+    priorityqueue = util.PriorityQueueWithFunction(cost)
+
+    return graphSearch(problem, priorityqueue)
+
+
 
 def nullHeuristic(state, problem=None):
     """
@@ -156,9 +171,8 @@ def nullHeuristic(state, problem=None):
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
 
+    
 
 # Abbreviations
 bfs = breadthFirstSearch
