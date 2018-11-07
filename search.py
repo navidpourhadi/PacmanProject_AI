@@ -91,15 +91,15 @@ def graphSearch(problem, fringes):
         # make a list that show the path until current node
         path = fringes.pop()
 
-        currentNode = path[-1][0]
-        if problem.isGoalState(currentNode):
+        currentState = path[-1][0]
+        if problem.isGoalState(currentState):
             return [x[1] for x in path][1:]
 
-        if currentNode not in closed:
-            closed.append(currentNode)
+        if currentState not in closed:
+            closed.append(currentState)
 
             # add successors of current node at the end of the fringes list
-            for successor in problem.getSuccessors(currentNode):
+            for successor in problem.getSuccessors(currentState):
                 # test if this successor state is in closed list or not
                 if successor[0] not in closed:
                     # make the successor path and add it at the end of the fringes
@@ -137,7 +137,7 @@ def depthFirstSearch(problem):
     # dfs algorithm implement by stack
     stack = util.Stack()
 
-    return graphSearch(problem ,stack)
+    return graphSearch(problem, stack)
 
 
 
@@ -171,8 +171,13 @@ def nullHeuristic(state, problem=None):
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
+    # combine cost and heuristic of nodes
+    f = lambda path: problem.getCostOfActions([x[1] for x in path][1:]) + heuristic(path[-1][0], problem)
+    # make a priority queue base on f=g+h
+    priorityqueue = util.PriorityQueueWithFunction(f)
 
-    
+    return graphSearch(problem, priorityqueue)
+
 
 # Abbreviations
 bfs = breadthFirstSearch
