@@ -484,8 +484,10 @@ class ClosestDotSearchAgent(SearchAgent):
         walls = gameState.getWalls()
         problem = AnyFoodSearchProblem(gameState)
 
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        #find closest food with algorithms we defined in search.py
+        from search import bfs , dfs , astar , ucs
+        return bfs(problem)
+
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
