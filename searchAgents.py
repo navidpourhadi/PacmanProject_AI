@@ -518,10 +518,16 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         The state is Pacman's position. Fill this in with a goal test that will
         complete the problem definition.
         """
-        x,y = state
 
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        #make an array that store the list of food states
+        foodsArray = self.food.asList()
+
+        #return true if the pacman agent state has food and false if pacman agent state hasn't food
+        if state in foodsArray:
+            return True
+        else:
+            return False
 
 def mazeDistance(point1, point2, gameState):
     """
